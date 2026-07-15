@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://vision.ataraxydigital.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vision.ataraxydigital.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://vision.ataraxydigital.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://vision.ataraxydigital.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vision.ataraxydigital.com/"/>
+  </url>
+  <url>
+    <loc>https://vision.ataraxydigital.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vision.ataraxydigital.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://vision.ataraxydigital.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://vision.ataraxydigital.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vision.ataraxydigital.com/"/>
+  </url>
+  <url>
+    <loc>https://vision.ataraxydigital.com/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vision.ataraxydigital.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://vision.ataraxydigital.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://vision.ataraxydigital.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vision.ataraxydigital.com/"/>
+  </url>
+</urlset>

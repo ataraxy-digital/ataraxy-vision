@@ -1,0 +1,646 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sports Vision - AI that watches the game and calls every shot | ataraxy</title>
+<meta name="description" content="ataraxy builds real-time computer vision for sports video. Every shot detected, tracked and called as it happens, live from a camera or from uploaded footage. Built on your infrastructure, owned by you.">
+<meta property="og:title" content="Sports Vision - every shot detected, tracked and called, live">
+<meta property="og:description" content="Real-time computer vision for sports video. Ball and rim detection, trajectory tracking, make and miss calls in under a second. Built on your infrastructure, owned by you.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ataraxy">
+<meta property="og:url" content="https://vision.ataraxydigital.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_UY">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:image" content="https://vision.ataraxydigital.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sports Vision - every shot detected, tracked and called, live">
+<meta name="twitter:description" content="Real-time computer vision for sports video. Ball and rim detection, trajectory tracking, make and miss calls in under a second. Built on your infrastructure, owned by you.">
+<meta name="twitter:image" content="https://vision.ataraxydigital.com/og.png">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<!-- Google Analytics (same property as the rest of the suite) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-317SSLERQ2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-317SSLERQ2');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='5 -19 475 475' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23217CFF' d='M350,124.9 C353.6,127.7 357.4,130.3 360.7,133.3 C369.9,141.6 378.8,150.3 388.1,158.5 C401.5,170.3 415.3,181.8 428.9,193.4 C431,195.2 433.2,197 435.3,198.8 C438,201.2 437.8,204.2 435.7,206.7 C425.7,218.9 415.6,230.8 405.5,243 C393.4,257.6 381.5,272.4 369.4,287 C360.3,298 351,308.8 341.8,319.7 C336.8,325.6 331.9,331.6 327,337.5 C324.8,340.2 322.6,341 319.5,338.2 C312.5,332.1 305.2,326.4 298,320.4 L296.5,319 C288.8,312.5 288.6,312.4 294.5,305.1 C303.3,294.2 312.5,283.8 321.4,273 C332.2,260 342.8,246.9 353.6,233.9 C360.6,225.5 367.8,217.2 375.4,208.3 C364.1,198.3 353.1,188.5 342.1,178.5 C336.4,173.4 331,168.1 325.4,162.9 C324.1,161.7 322.6,160.7 321.1,159 C330.7,147.2 340.4,136 350,124.9z'/%3E%3Cpath fill='%23217CFF' d='M135,311.1 C123.8,301.1 112.8,290.9 101.5,281 C85.4,267 69.1,253.1 52.8,239.4 C46.8,234.3 46.7,232.6 51.8,226.6 C61.5,215.2 70.9,203.6 80.4,192.2 C89.2,181.6 98.2,171.1 107,160.5 C116.1,149.5 125.1,138.5 134.2,127.5 C142.5,117.5 150.7,107.5 159.2,97.8 C160.2,96.6 164,96.3 165.2,97.2 C175,104.8 184.7,112.7 194,120.9 C195.1,121.9 194.9,126.1 193.8,127.5 C183.6,140.1 173,152.4 162.6,164.9 C150.1,179.9 137.8,195.1 125.4,210.1 C121.3,215 117.2,219.9 112.8,224.6 C110.7,226.8 110.4,228.3 112.8,230.3 C117.5,234.2 122.2,238.1 126.6,242.2 C139.2,253.7 151.7,265.2 164.5,277.2 C154.8,288.8 144.9,299.9 135,311.1z'/%3E%3Cpath fill='%2362DDF3' d='M135.1,311.4 C144.9,299.9 154.8,288.8 164.8,277.3 C174.4,266.3 184,255.7 193.5,245 C198.8,239.1 204.1,233.3 209.2,227.3 C211.8,224.1 214.2,225 216.6,227.1 C223.6,233.4 230.5,239.7 237.5,246 C239.1,247.4 241.6,248.3 242.3,250.1 C243.2,252.2 243.9,255.9 242.8,257.4 C235.7,266.2 228,274.5 220.5,283 C208.8,296.3 197.2,309.7 185.4,323 C181,328.1 176.1,332.8 171.7,337.9 C169.3,340.7 167.2,340.2 165,338.4 C159.9,334.2 154.9,329.9 150.1,325.5 C145,321 140.1,316.3 135.1,311.4z'/%3E%3Cpath fill='%2362DDF3' d='M350,124.5 C340.4,136 330.7,147.2 320.9,158.7 C307.2,174.5 293.6,190 280,205.5 C274.4,212 273.1,212.2 264.8,205.2 C257.4,198.9 250.4,192.1 243.1,185.7 C240.6,183.3 240.2,181.4 242.8,178.6 C252.6,167.8 262.2,156.7 271.8,145.7 C282.8,133.1 293.7,120.4 304.7,107.8 C307.5,104.6 310.3,101.3 313.3,98.3 C315.8,95.8 318.1,95.1 321.4,98.5 C326.2,103.5 332,107.5 337.2,112.1 C341.6,116 345.7,120.1 350,124.5z'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#06070a;
+  --bg-panel:#0a0c11;
+  --bg-card:#0d1016;
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.14);
+  --text:#eef1f6;
+  --text-dim:#9aa3b2;
+  --text-faint:#5c6470;
+  --blue:#217CFF;
+  --cyan:#62DDF3;
+  --blue-glow:rgba(33,124,255,.14);
+  --font-display:'Outfit',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--blue);color:#fff}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+
+/* ---------- atmosphere ---------- */
+.atmo{position:fixed;inset:0;z-index:0;pointer-events:none}
+.atmo::before{
+  content:"";position:absolute;top:-30vh;right:-20vw;width:80vw;height:80vh;
+  background:radial-gradient(ellipse at center,var(--blue-glow),transparent 65%);
+}
+.atmo::after{
+  content:"";position:absolute;inset:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+main,nav,footer{position:relative;z-index:1}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 5vw;
+  background:rgba(6,7,10,.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-wrap span{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.01em}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;color:var(--text-dim);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-display);font-weight:600;font-size:15px;
+  padding:11px 22px;border-radius:10px;transition:.25s;cursor:pointer;white-space:nowrap;
+}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 0 24px rgba(33,124,255,.35)}
+.btn-primary:hover{background:#3a8bff;transform:translateY(-1px);box-shadow:0 4px 32px rgba(33,124,255,.5)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--text)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.nav-cta{padding:9px 18px;font-size:14px}.nav-dd{position:relative;padding-bottom:16px;margin-bottom:-16px}.nav-dd-trigger{cursor:pointer}.nav-dd-menu{position:absolute;top:100%;left:0;display:none;flex-direction:column;min-width:220px;background:var(--bg-panel);border:1px solid var(--line-strong);border-radius:12px;padding:8px;box-shadow:0 18px 44px -18px rgba(0,0,0,.7)}.nav-dd:hover .nav-dd-menu{display:flex}.nav-dd-menu a{font-size:14px;color:var(--text-dim);padding:9px 12px;border-radius:8px;white-space:nowrap;transition:.2s}.nav-dd-menu a:hover{background:var(--bg-card);color:var(--text)}
+@media(max-width:860px){.nav-links{display:none}}
+@media(max-width:480px){nav{padding:14px 4vw}.nav-cta{padding:8px 13px;font-size:13px}.logo-wrap span{font-size:19px}.nav-right{gap:10px}}
+
+/* ---------- shared ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 5vw}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:26px;
+}
+.eyebrow::before{content:"";width:28px;height:1.5px;background:var(--blue)}
+section{padding:110px 0;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:40px;margin-bottom:64px;align-items:start}
+.sec-num{
+  font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--text-faint);
+  border:1px solid var(--line-strong);border-radius:99px;padding:6px 14px;margin-top:6px;
+}
+h2{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4.2vw,46px);line-height:1.12;letter-spacing:-.02em}
+h2 .acc{color:var(--blue)}
+.sec-sub{color:var(--text-dim);max-width:560px;margin-top:18px;font-size:17px}
+@media(max-width:700px){.sec-head{grid-template-columns:1fr;gap:18px}}
+
+/* ---------- hero ---------- */
+.hero{padding:200px 0 90px;border-top:none}
+h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(42px,6.4vw,84px);line-height:1.04;letter-spacing:-.025em;
+  max-width:14ch;
+}
+h1 .acc{color:var(--blue)}
+.hero-sub{color:var(--text-dim);font-size:clamp(17px,1.5vw,20px);max-width:600px;margin:30px 0 42px;font-weight:300}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.hero .reveal-load{opacity:0;transform:translateY(22px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+.hero .d1{animation-delay:.05s}.hero .d2{animation-delay:.18s}.hero .d3{animation-delay:.32s}.hero .d4{animation-delay:.46s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- shot log (signature element) ---------- */
+.shotlog{
+  margin-top:52px;max-width:560px;
+  border:1px solid var(--line-strong);border-radius:14px;overflow:hidden;
+  background:rgba(10,12,17,.8);
+}
+.shotlog-head{
+  display:flex;align-items:center;gap:10px;padding:11px 18px;
+  border-bottom:1px solid var(--line);
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);
+}
+.shotlog-head .dot{width:7px;height:7px;border-radius:99px;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex:none;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.shotlog-body{padding:16px 18px;font-family:var(--font-mono);font-size:12.5px;line-height:2.05;color:var(--text-dim)}
+.shotlog-body .t{color:var(--text-faint);margin-right:14px}
+.shotlog-body .ev{color:var(--text)}
+.shotlog-body .make{color:var(--cyan)}
+.shotlog-body .conf{color:var(--text-faint);float:right}
+.shotlog-body div{opacity:0;animation:logline .5s ease forwards}
+.shotlog-body div:nth-child(1){animation-delay:.7s}
+.shotlog-body div:nth-child(2){animation-delay:1.15s}
+.shotlog-body div:nth-child(3){animation-delay:1.6s}
+.shotlog-body div:nth-child(4){animation-delay:2.05s}
+.shotlog-body div:nth-child(5){animation-delay:2.5s}
+@keyframes logline{to{opacity:1}}
+@media(max-width:560px){.shotlog-body{font-size:11px}.shotlog-body .conf{display:none}}
+
+/* ---------- ticker ---------- */
+.ticker{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;padding:17px 0;white-space:nowrap;
+  background:rgba(255,255,255,.015);
+}
+.ticker-track{display:inline-block;animation:scroll 36s linear infinite}
+.ticker span{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-faint);margin:0 14px;
+}
+.ticker i{color:var(--blue);font-style:normal}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:18px;
+  padding:36px 30px 30px;display:flex;flex-direction:column;min-height:430px;
+  position:relative;overflow:hidden;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  opacity:0;transition:.35s;
+}
+.card:hover{transform:translateY(-6px);border-color:rgba(33,124,255,.4);box-shadow:0 24px 60px -24px rgba(33,124,255,.28)}
+.card:hover::before{opacity:1}
+.card-tag{
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:22px;
+}
+.card h3{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.01em;margin-bottom:6px}
+.card .card-tagline{font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--blue);margin-bottom:16px}
+.card p{color:var(--text-dim);font-size:15px;flex:1}
+.card-link{
+  display:inline-flex;align-items:center;gap:8px;margin-top:26px;
+  font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--text);
+}
+.card-link .arr{transition:transform .25s;color:var(--blue)}
+.card:hover .card-link .arr{transform:translateX(5px)}
+.card-domain{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);margin-top:8px}
+@media(max-width:960px){.cards{grid-template-columns:1fr}.card{min-height:0}}
+
+/* ---------- process ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.step{padding:42px 34px;border-right:1px solid var(--line);background:var(--bg-panel);position:relative}
+.step:last-child{border-right:none}
+.step-num{
+  font-family:var(--font-display);font-weight:800;font-size:54px;color:transparent;
+  -webkit-text-stroke:1px rgba(33,124,255,.5);margin-bottom:18px;line-height:1;
+}
+.step h3{font-family:var(--font-display);font-weight:700;font-size:21px;margin-bottom:12px}
+.step p{color:var(--text-dim);font-size:15px}
+@media(max-width:900px){.steps{grid-template-columns:1fr}.step{border-right:none;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:none}}
+.process-foot{
+  margin-top:36px;display:flex;align-items:center;gap:14px;
+  font-family:var(--font-mono);font-size:12.5px;color:var(--text-faint);letter-spacing:.04em;
+}
+.process-foot .dot{width:7px;height:7px;border-radius:99px;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex:none}
+
+/* ---------- manifesto ---------- */
+.manifesto{
+  border:1px solid rgba(33,124,255,.3);border-radius:18px;padding:46px 44px;
+  background:linear-gradient(180deg,rgba(33,124,255,.06),rgba(33,124,255,.015));
+  display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:center;
+}
+.manifesto h3{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,2.6vw,30px);line-height:1.2;letter-spacing:-.015em}
+.manifesto h3 .acc{color:var(--blue)}
+.manifesto .man-body p{color:var(--text-dim);font-size:15.5px}
+.manifesto .man-body p+p{margin-top:14px}
+@media(max-width:860px){.manifesto{grid-template-columns:1fr;padding:36px 28px}}
+
+/* ---------- cta ---------- */
+.cta-sec{text-align:center;padding:130px 0}
+.cta-sec h2{max-width:18ch;margin:0 auto}
+.cta-sec .sec-sub{margin:22px auto 44px}
+.cta-actions{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.cta-mail{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:13.5px;color:var(--text-dim);
+  border-bottom:1px solid var(--line-strong);padding-bottom:2px;transition:.2s;
+}
+.cta-mail:hover{color:var(--blue);border-color:var(--blue)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:64px 0 44px;background:var(--bg-panel)}.axyp-strip{border-top:1px solid var(--line,rgba(255,255,255,.1));padding-top:30px;margin-bottom:30px;display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between}.axyp-group{display:flex;flex-direction:column;align-items:flex-start;gap:14px}.axyp-label{font-family:var(--font-mono,monospace);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint,#8a8f99);font-weight:500;margin:0}.axyp-logos{display:flex;align-items:center;gap:30px;flex-wrap:wrap}.axyp-brand{display:inline-flex;align-items:center;gap:9px;color:var(--text-dim,#aeb4bf);font-size:15px;font-weight:600;letter-spacing:-.01em;border:0;background:none;padding:0}.axyp-brand svg{width:20px;height:20px;fill:currentColor;flex:none}.axyp-owner{gap:11px;text-decoration:none;color:inherit;transition:opacity .2s,color .2s}.axyp-owner:hover .axyp-owner-logo{opacity:1}.axyp-owner:hover .axyp-owner-msg{color:var(--text-dim,#aeb4bf)}.axyp-owner-logo{height:34px;width:auto;opacity:.9}.axyp-owner-msg{font-size:12.5px;color:var(--text-faint,#8a8f99);max-width:320px;line-height:1.55;margin:0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;margin-bottom:54px}
+.foot-brand p{color:var(--text-dim);font-size:14.5px;max-width:300px;margin-top:16px}
+.foot-col h4{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-faint);margin-bottom:18px;font-weight:500;
+}
+.foot-col a{display:block;font-size:14.5px;color:var(--text-dim);margin-bottom:11px;transition:.2s}
+.foot-col a:hover{color:var(--blue)}
+.foot-col address{font-style:normal;font-size:14.5px;color:var(--text-dim);line-height:1.8}
+.foot-bottom{
+  border-top:1px solid var(--line);padding-top:26px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  font-family:var(--font-mono);font-size:11.5px;color:var(--text-faint);
+}
+@media(max-width:800px){.foot-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ---------- scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-rd="1"]{transition-delay:.08s}
+.reveal[data-rd="2"]{transition-delay:.16s}
+.reveal[data-rd="3"]{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){
+  .reveal,.hero .reveal-load{opacity:1;transform:none;animation:none;transition:none}
+  .ticker-track{animation:none}
+  .shotlog-body div{opacity:1;animation:none}
+  .shotlog-head .dot{animation:none}
+}
+
+.lang-foot{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:18px}
+.lang-foot a{color:var(--text-faint);text-decoration:none;padding:4px 11px;border:1px solid var(--line);border-radius:99px;font-family:var(--font-mono);font-size:11px;line-height:1;transition:color .2s,border-color .2s,background .2s}
+.lang-foot a:hover{color:var(--text);border-color:var(--line-strong)}
+.lang-foot a.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+</style>
+<style>
+/* ---------- sub-page components (gap-grid, features) ---------- */
+.gap-grid{display:grid;grid-template-columns:120px 1fr;gap:40px;align-items:start}
+.gap-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);padding-top:6px}
+.gap-body p{color:var(--text-dim);font-size:17px;max-width:62ch}
+.gap-body p+p{margin-top:18px}
+.gap-body b{color:var(--text);font-weight:500}
+@media(max-width:700px){.gap-grid{grid-template-columns:1fr;gap:14px}}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.feature{background:var(--bg-card);border:1px solid var(--line);border-radius:18px;padding:32px 30px;transition:border-color .3s;position:relative;display:flex;flex-direction:column}
+.feature:hover{border-color:rgba(33,124,255,.35)}
+.feature .f-tag{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.feature h3{font-family:var(--font-display);font-weight:700;font-size:19px;margin-bottom:10px;letter-spacing:-.01em}
+.feature p{color:var(--text-dim);font-size:14.5px}
+.feature.featured{border-color:rgba(33,124,255,.45);background:linear-gradient(180deg,rgba(33,124,255,.06),rgba(33,124,255,.015))}
+.feature.featured .f-tag{color:var(--blue)}
+.feat-badge{position:absolute;top:22px;right:24px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(33,124,255,.4);border-radius:99px;padding:4px 10px}
+@media(max-width:760px){.features{grid-template-columns:1fr}}
+</style>
+<link rel="canonical" href="https://vision.ataraxydigital.com/">
+<link rel="alternate" hreflang="en" href="https://vision.ataraxydigital.com/">
+<link rel="alternate" hreflang="es" href="https://vision.ataraxydigital.com/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://vision.ataraxydigital.com/pt/">
+<link rel="alternate" hreflang="x-default" href="https://vision.ataraxydigital.com/">
+</head>
+<body>
+<div class="atmo"></div>
+
+<nav>
+  <div class="logo-wrap">
+    <a href="https://www.ataraxydigital.com/" aria-label="ataraxy home" style="display:inline-flex;align-items:center;gap:9px;color:inherit">
+    <svg height="26" viewBox="1 90 440 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#217CFF" d="M350.027802,124.888145 C353.611603,127.685440 357.380096,130.278412 360.743683,133.319305 C369.937012,141.630722 378.783051,150.332047 388.092072,158.508438 C401.536316,170.316986 415.265320,181.801361 428.877960,193.418060 C430.997253,195.226624 433.179504,196.962814 435.268860,198.804810 C438.039764,201.247635 437.800781,204.182755 435.736389,206.696671 C425.749939,218.857590 415.554962,230.847061 405.536926,242.982330 C393.447723,257.626465 381.529816,272.412262 369.409515,287.030426 C360.297180,298.020721 350.964081,308.827698 341.765533,319.746887 C336.803223,325.637451 331.919098,331.593872 326.995880,337.517365 C324.751282,340.218018 322.648071,340.962555 319.529694,338.242493 C312.505829,332.115875 305.159332,326.359283 297.953125,320.441223 C297.440582,320.020294 297.031281,319.474670 296.523621,319.046753 C288.806030,312.541229 288.594177,312.372803 294.547943,305.054504 C303.345703,294.240387 312.542389,283.751892 321.449554,273.025360 C332.225616,260.048248 342.824127,246.923706 353.600891,233.947174 C360.619598,225.495804 367.818939,217.194427 375.376678,208.309418 C364.147736,198.276947 353.071960,188.462845 342.094604,178.539871 C336.449524,173.436981 331.001221,168.117004 325.415222,162.947784 C324.104889,161.735199 322.597107,160.735901 321.090698,158.979019 C330.676758,147.175751 340.352295,136.031952 350.027802,124.888145z"></path>
+      <path fill="#217CFF" d="M134.957397,311.098450 C123.800247,301.064056 112.768318,290.885956 101.455986,281.029694 C85.355560,267.001617 69.103889,253.145279 52.802265,239.350967 C46.801086,234.272797 46.727486,232.563889 51.821907,226.591797 C61.501316,215.244797 70.853821,203.619583 80.402939,192.160599 C89.227562,181.570984 98.175568,171.084106 106.988884,160.485153 C116.102997,149.524475 125.093651,138.461227 134.187927,127.483940 C142.456024,117.503876 150.683990,107.485092 159.240875,97.757133 C160.231369,96.631096 163.956192,96.293633 165.151794,97.219536 C174.994095,104.841583 184.655136,112.715340 194.013458,120.920715 C195.095032,121.869026 194.909119,126.050270 193.756699,127.479393 C183.564529,140.118896 172.966232,152.429626 162.595535,164.926788 C150.140656,179.935425 137.817886,195.053619 125.381012,210.077255 C121.293785,215.014603 117.163727,219.931046 112.786438,224.607269 C110.733513,226.800415 110.428322,228.332748 112.805328,230.320389 C117.468147,234.219437 122.152992,238.102295 126.644859,242.193710 C139.224823,253.652115 151.711151,265.213318 164.456100,277.168549 C154.770996,288.768250 144.864197,299.933350 134.957397,311.098450z"></path>
+      <path fill="#62DDF3" d="M135.076126,311.407806 C144.864197,299.933350 154.770996,288.768250 164.760666,277.288361 C174.398010,266.317200 183.964157,255.671234 193.502289,245.000244 C198.759201,239.118973 204.088837,233.295944 209.151535,227.250565 C211.827820,224.054810 214.158386,224.954575 216.608810,227.145142 C223.605881,233.400223 230.536102,239.730072 237.528625,245.990311 C239.104858,247.401489 241.572189,248.335251 242.295776,250.051147 C243.222046,252.247696 243.938950,255.936813 242.768829,257.383179 C235.650803,266.181702 227.952469,274.509552 220.482559,283.024963 C208.797180,296.345856 197.183014,309.729523 185.447845,323.006287 C180.967209,328.075500 176.075562,332.786163 171.683716,337.927185 C169.318832,340.695496 167.174744,340.211914 164.952301,338.368408 C159.908066,334.184326 154.934494,329.908844 150.057983,325.530426 C145.026016,321.012421 140.143021,316.328491 135.076126,311.407806z"></path>
+      <path fill="#62DDF3" d="M350.010803,124.540001 C340.352295,136.031952 330.676758,147.175751 320.938782,158.666260 C307.249420,174.504944 293.579071,189.958939 280.016632,205.507080 C274.387939,211.959885 273.083099,212.204773 264.774841,205.164398 C257.368378,198.888260 250.366486,192.136322 243.131958,185.654755 C240.555328,183.346268 240.249435,181.423477 242.783081,178.615005 C252.573059,167.763107 262.158417,156.725876 271.770508,145.714478 C282.776367,133.106354 293.720490,120.444374 304.711975,107.823685 C307.520905,104.598412 310.255280,101.285271 313.305511,98.300201 C315.826477,95.833069 318.134247,95.090118 321.358429,98.453644 C326.155945,103.458473 331.991089,107.452751 337.208618,112.075783 C341.600647,115.967392 345.741638,120.142342 350.010803,124.540001z"></path>
+    </svg>
+    <span>ataraxy</span>
+    </a>
+  </div>
+  <div class="nav-links">
+      <div class="nav-dd">
+        <a href="https://www.ataraxydigital.com/#services" class="nav-dd-trigger">Services</a>
+        <div class="nav-dd-menu">
+          <a href="https://caio.ataraxydigital.com/">Fractional CAIO</a>
+          <a href="https://voice.ataraxydigital.com/">Voice AI</a>
+          <a href="https://portcoai.ataraxydigital.com/">AI for PE / VC</a>
+          <a href="https://sprint.ataraxydigital.com/">AI Sprint</a>
+          <a href="https://qa.ataraxydigital.com/">Call QA</a>
+          <a href="https://revenue.ataraxydigital.com/">Revenue Engine</a>
+          <a href="https://vision.ataraxydigital.com/">Sports Vision</a>
+        </div>
+      </div>
+      <a href="https://www.ataraxydigital.com/#work">Implementations</a>
+      <a href="https://www.ataraxydigital.com/#contact">Contact</a>
+    </div>
+  <div class="nav-right">
+    <a class="btn btn-primary nav-cta" href="https://meet.ataraxydigital.com" target="_blank" rel="noopener">Book a call</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow reveal-load d1"><span>Sports Vision &middot; computer vision for the game</span></div>
+      <h1 class="reveal-load d2">AI that watches the game and calls every <span class="acc">shot</span>.</h1>
+      <p class="hero-sub reveal-load d3">ataraxy builds real-time computer vision for sports video. Point a camera at the court and every shot is detected, tracked and called as it happens: makes, misses, trajectories, scores. Live from a camera or from uploaded footage. Built on your infrastructure, owned by you.</p>
+      <div class="hero-ctas reveal-load d4">
+        <a class="btn btn-primary" href="https://meet.ataraxydigital.com" target="_blank" rel="noopener">Book a call</a>
+        <a class="btn btn-ghost" href="#how">See how it works &darr;</a>
+      </div>
+      <div class="shotlog reveal-load d4" aria-hidden="true">
+        <div class="shotlog-head"><span class="dot"></span><span>Live feed &middot; court cam 01</span></div>
+        <div class="shotlog-body">
+          <div><span class="t">00:07.2</span><span class="ev">BALL DETECTED</span><span class="conf">conf 0.97</span></div>
+          <div><span class="t">00:08.1</span><span class="ev">SHOT RELEASED</span><span class="conf">arc 48&deg;</span></div>
+          <div><span class="t">00:09.0</span><span class="ev">TRAJECTORY LOCK</span><span class="conf">27 pts</span></div>
+          <div><span class="t">00:09.4</span><span class="ev">RIM CONTACT</span><span class="conf">bounce</span></div>
+          <div><span class="t">00:09.8</span><span class="make">RESULT &middot; MAKE</span><span class="conf">+2</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track"><span>Real-time</span><i>&middot;</i><span>Make / miss calls</span><i>&middot;</i><span>Trajectory tracking</span><i>&middot;</i><span>Live camera streaming</span><i>&middot;</i><span>Frame-accurate</span><i>&middot;</i><span>Batch processing</span><i>&middot;</i><span>On your infrastructure</span><i>&middot;</i><span>You own it</span><i>&middot;</i><span>Beyond basketball</span><i>&middot;</i><span>Real-time</span><i>&middot;</i><span>Make / miss calls</span><i>&middot;</i><span>Trajectory tracking</span><i>&middot;</i><span>Live camera streaming</span><i>&middot;</i><span>Frame-accurate</span><i>&middot;</i><span>Batch processing</span><i>&middot;</i><span>On your infrastructure</span><i>&middot;</i><span>You own it</span><i>&middot;</i><span>Beyond basketball</span><i>&middot;</i></div>
+  </div>
+
+  <!-- 01 THE GAP -->
+  <section id="gap" style="border-top:none">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">01</div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px">The gap</div>
+          <h2>Game film doesn't watch <span class="acc">itself</span>.</h2>
+          <p class="sec-sub">Every week, coaches and analysts burn hours tagging footage by hand. The stats arrive late, incomplete, or not at all.</p>
+        </div>
+      </div>
+      <div class="gap-grid reveal">
+        <div class="gap-label">The gap</div>
+        <div class="gap-body">
+          <p>Video is the richest data a sports organization owns, and most of it goes unwatched. Manual tagging is slow and expensive, so it only happens for the games that matter most. The big sports-analytics vendors will do it for you, but you pay per game, per season, forever, and the models, the data and the pipeline all stay theirs.</p>
+          <p>The winning move is a <b>vision system of your own</b>: cameras you already have, models tuned to your sport, an API your product and your staff can call. Every game watched, every shot counted, and the whole engine belongs to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 WHAT IT DOES -->
+  <section id="build">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">02</div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px">What it does</div>
+          <h2>Eyes on the ball, <span class="acc">every frame</span>.</h2>
+          <p class="sec-sub">One vision engine that detects the ball and the rim, follows the trajectory, and calls the outcome the moment it happens.</p>
+        </div>
+      </div>
+      <div class="features reveal">
+        <div class="feature" data-rd="1">
+          <div class="f-tag">Shot detection</div>
+          <h3>Every make and every miss, called live</h3>
+          <p>Detection models trained for the court find the ball and the rim in every frame, and a shot classifier calls the outcome. Makes, misses and scores land in your feed seconds after they happen on the floor.</p>
+        </div>
+        <div class="feature" data-rd="2">
+          <div class="f-tag">Trajectory tracking</div>
+          <h3>It follows the ball, not just the frame</h3>
+          <p>The engine tracks the full arc of every shot across frames, through hands, bodies and bad angles. That trajectory is what separates a real attempt from noise, and it is how the classifier knows what actually happened.</p>
+        </div>
+        <div class="feature" data-rd="1">
+          <div class="f-tag">Live streaming</div>
+          <h3>From camera to call in under a second</h3>
+          <p>A streaming pipeline takes compressed video straight from the camera over WebSocket and processes it frame by frame as it arrives. No upload-and-wait: the game and its stats run on the same clock.</p>
+        </div>
+        <div class="feature featured" data-rd="2">
+          <div class="feat-badge">The difference</div>
+          <div class="f-tag">Production-grade</div>
+          <h3>An engine, not a notebook</h3>
+          <p>This is not a demo that dies outside the lab. Authenticated API, rate limiting, structured logs, Prometheus metrics, batch queues for full-game uploads, and an accuracy review UI to keep the models honest. Built to run every game night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">03</div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px">How it works</div>
+          <h2>How the engine <span class="acc">sees</span>.</h2>
+          <p class="sec-sub">Stream, track, call. Live camera or uploaded footage, same brain.</p>
+        </div>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Stream</h3>
+          <p>Video comes in live from a courtside camera over WebSocket, or as full-game files through the batch queue. Same pipeline either way, so accuracy in the lab is accuracy on game night.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Track</h3>
+          <p>Frame by frame, detection models find the ball and the rim while the tracker stitches detections into trajectories. Every arc toward the basket becomes a candidate shot with a full flight path.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Call</h3>
+          <p>The classifier rules on every attempt: make or miss, plus running score. Results stream out as structured events your app consumes over the API, with annotated video when you want the receipts.</p>
+        </div>
+      </div>
+      <div class="process-foot reveal">
+        <span class="dot"></span>
+        <span>One pipeline. Live camera or uploaded footage, same brain.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 YOU OWN IT -->
+  <section id="own">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">04</div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px">Ownership</div>
+          <h2>You <span class="acc">own</span> the engine.</h2>
+          <p class="sec-sub">Not a per-game subscription to somebody else's black box. We build it, you keep it.</p>
+        </div>
+      </div>
+      <div class="features reveal">
+        <div class="feature" data-rd="1"><div class="f-tag">Your infrastructure</div><h3>Runs where you run</h3><p>The engine deploys on your own cloud with GPU when you need throughput. Your footage is processed on infrastructure you control, and cleanup policies mean video never lingers longer than it should.</p></div>
+        <div class="feature" data-rd="2"><div class="f-tag">API-first</div><h3>Plugs into your product</h3><p>Everything the engine sees is available as clean, structured events over an authenticated API and WebSocket. Feed a live scoreboard, a coaching dashboard, a fan app, or all three at once.</p></div>
+        <div class="feature" data-rd="1"><div class="f-tag">No lock-in</div><h3>No per-game meter running</h3><p>A fixed build, then it is yours. No per-game fees, no per-season renewals, no vendor holding your own footage hostage. It keeps running whether or not we are in the room.</p></div>
+        <div class="feature" data-rd="2"><div class="f-tag">Your data</div><h3>Your footage, your models, your stats</h3><p>The models are tuned on your context and handed over documented, with an accuracy review workflow so your team can keep them sharp as conditions change. Nothing about how it works is a secret to you.</p></div>
+      </div>
+      <div class="process-foot reveal">
+        <span class="dot"></span>
+        <span>We stay available. We don't stay necessary.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 BEYOND BASKETBALL -->
+  <section id="beyond">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">05</div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px">Beyond basketball</div>
+          <h2>Built for the court. Ready for <span class="acc">any camera</span>.</h2>
+          <p class="sec-sub">Basketball is where we proved it. The same engine learns whatever your cameras watch.</p>
+        </div>
+      </div>
+      <div class="manifesto reveal">
+        <h3>If a camera can see it, the engine can <span class="acc">call it</span>.</h3>
+        <div class="man-body">
+          <p>Shots at a rim are just events in a video stream: an object, a trajectory, an outcome. The same pipeline that calls makes and misses can call goals and saves, serves and faults, reps in a gym, vehicles in a lot, or safety events on a factory floor.</p>
+          <p>If you have cameras and questions they should be answering, that is exactly the kind of system we build: detection tuned to your world, real-time when it matters, delivered on your infrastructure and owned by you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 WHERE IT PLUGS IN -->
+  <section id="next">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">06</div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px">Where it plugs in</div>
+          <h2>Part of your <span class="acc">whole motion</span>.</h2>
+          <p class="sec-sub">Sports Vision stands on its own, and it connects to the rest of what we build.</p>
+        </div>
+      </div>
+      <div class="cards reveal">
+        <a class="card" data-rd="1" href="https://sprint.ataraxydigital.com/" target="_blank" rel="noopener">
+          <div class="card-tag">Start small</div>
+          <h3>Begin with an AI Sprint</h3>
+          <div class="card-tagline">Fixed price, fixed scope, you own it.</div>
+          <p>Want vision on your own footage first? Start with a fixed-scope Sprint: your cameras, your sport, a working detector in weeks, then scale into the full engine.</p>
+          <span class="card-link"><span>Explore the service</span> <span class="arr">&rarr;</span></span>
+          <span class="card-domain">sprint.ataraxydigital.com</span>
+        </a>
+        <a class="card" data-rd="2" href="https://caio.ataraxydigital.com/" target="_blank" rel="noopener">
+          <div class="card-tag">Leadership</div>
+          <h3>Bring in a Fractional CAIO</h3>
+          <div class="card-tagline">Senior AI leadership, embedded.</div>
+          <p>Have an AI executive run the vision roadmap and the rest of your AI strategy across the company, without the full-time hire.</p>
+          <span class="card-link"><span>Explore the service</span> <span class="arr">&rarr;</span></span>
+          <span class="card-domain">caio.ataraxydigital.com</span>
+        </a>
+        <a class="card" data-rd="3" href="https://revenue.ataraxydigital.com/" target="_blank" rel="noopener">
+          <div class="card-tag">Grow the business</div>
+          <h3>Add a Revenue Engine</h3>
+          <div class="card-tagline">AI outbound that books your best-fit accounts.</div>
+          <p>Pair the product with pipeline. An AI revenue engine that finds accounts showing intent and reaches the right person in their own language.</p>
+          <span class="card-link"><span>Explore the service</span> <span class="arr">&rarr;</span></span>
+          <span class="card-domain">revenue.ataraxydigital.com</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="cta-sec">
+    <div class="wrap">
+      <div class="reveal">
+        <h2>Put eyes on <span class="acc">your game</span>.</h2>
+        <p class="sec-sub">A 30-minute call. Bring the footage or the cameras you already have; we'll map what a vision engine can see for you, and scope a fixed price before you commit to anything.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="https://meet.ataraxydigital.com" target="_blank" rel="noopener">Book a call</a>
+          <a class="cta-mail" href="mailto:hello@ataraxydigital.com">hello@ataraxydigital.com &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo-wrap">
+          <svg height="26" viewBox="1 90 440 255" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#217CFF" d="M350.027802,124.888145 C353.611603,127.685440 357.380096,130.278412 360.743683,133.319305 C369.937012,141.630722 378.783051,150.332047 388.092072,158.508438 C401.536316,170.316986 415.265320,181.801361 428.877960,193.418060 C430.997253,195.226624 433.179504,196.962814 435.268860,198.804810 C438.039764,201.247635 437.800781,204.182755 435.736389,206.696671 C425.749939,218.857590 415.554962,230.847061 405.536926,242.982330 C393.447723,257.626465 381.529816,272.412262 369.409515,287.030426 C360.297180,298.020721 350.964081,308.827698 341.765533,319.746887 C336.803223,325.637451 331.919098,331.593872 326.995880,337.517365 C324.751282,340.218018 322.648071,340.962555 319.529694,338.242493 C312.505829,332.115875 305.159332,326.359283 297.953125,320.441223 C297.440582,320.020294 297.031281,319.474670 296.523621,319.046753 C288.806030,312.541229 288.594177,312.372803 294.547943,305.054504 C303.345703,294.240387 312.542389,283.751892 321.449554,273.025360 C332.225616,260.048248 342.824127,246.923706 353.600891,233.947174 C360.619598,225.495804 367.818939,217.194427 375.376678,208.309418 C364.147736,198.276947 353.071960,188.462845 342.094604,178.539871 C336.449524,173.436981 331.001221,168.117004 325.415222,162.947784 C324.104889,161.735199 322.597107,160.735901 321.090698,158.979019 C330.676758,147.175751 340.352295,136.031952 350.027802,124.888145z"></path>
+      <path fill="#217CFF" d="M134.957397,311.098450 C123.800247,301.064056 112.768318,290.885956 101.455986,281.029694 C85.355560,267.001617 69.103889,253.145279 52.802265,239.350967 C46.801086,234.272797 46.727486,232.563889 51.821907,226.591797 C61.501316,215.244797 70.853821,203.619583 80.402939,192.160599 C89.227562,181.570984 98.175568,171.084106 106.988884,160.485153 C116.102997,149.524475 125.093651,138.461227 134.187927,127.483940 C142.456024,117.503876 150.683990,107.485092 159.240875,97.757133 C160.231369,96.631096 163.956192,96.293633 165.151794,97.219536 C174.994095,104.841583 184.655136,112.715340 194.013458,120.920715 C195.095032,121.869026 194.909119,126.050270 193.756699,127.479393 C183.564529,140.118896 172.966232,152.429626 162.595535,164.926788 C150.140656,179.935425 137.817886,195.053619 125.381012,210.077255 C121.293785,215.014603 117.163727,219.931046 112.786438,224.607269 C110.733513,226.800415 110.428322,228.332748 112.805328,230.320389 C117.468147,234.219437 122.152992,238.102295 126.644859,242.193710 C139.224823,253.652115 151.711151,265.213318 164.456100,277.168549 C154.770996,288.768250 144.864197,299.933350 134.957397,311.098450z"></path>
+      <path fill="#62DDF3" d="M135.076126,311.407806 C144.864197,299.933350 154.770996,288.768250 164.760666,277.288361 C174.398010,266.317200 183.964157,255.671234 193.502289,245.000244 C198.759201,239.118973 204.088837,233.295944 209.151535,227.250565 C211.827820,224.054810 214.158386,224.954575 216.608810,227.145142 C223.605881,233.400223 230.536102,239.730072 237.528625,245.990311 C239.104858,247.401489 241.572189,248.335251 242.295776,250.051147 C243.222046,252.247696 243.938950,255.936813 242.768829,257.383179 C235.650803,266.181702 227.952469,274.509552 220.482559,283.024963 C208.797180,296.345856 197.183014,309.729523 185.447845,323.006287 C180.967209,328.075500 176.075562,332.786163 171.683716,337.927185 C169.318832,340.695496 167.174744,340.211914 164.952301,338.368408 C159.908066,334.184326 154.934494,329.908844 150.057983,325.530426 C145.026016,321.012421 140.143021,316.328491 135.076126,311.407806z"></path>
+      <path fill="#62DDF3" d="M350.010803,124.540001 C340.352295,136.031952 330.676758,147.175751 320.938782,158.666260 C307.249420,174.504944 293.579071,189.958939 280.016632,205.507080 C274.387939,211.959885 273.083099,212.204773 264.774841,205.164398 C257.368378,198.888260 250.366486,192.136322 243.131958,185.654755 C240.555328,183.346268 240.249435,181.423477 242.783081,178.615005 C252.573059,167.763107 262.158417,156.725876 271.770508,145.714478 C282.776367,133.106354 293.720490,120.444374 304.711975,107.823685 C307.520905,104.598412 310.255280,101.285271 313.305511,98.300201 C315.826477,95.833069 318.134247,95.090118 321.358429,98.453644 C326.155945,103.458473 331.991089,107.452751 337.208618,112.075783 C341.600647,115.967392 345.741638,120.142342 350.010803,124.540001z"></path>
+          </svg>
+          <span>ataraxy</span>
+        </div>
+        <p>Applied AI, built for you and owned by you. We embed, build, and transfer capability to your team.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="https://caio.ataraxydigital.com" target="_blank" rel="noopener">Fractional Chief AI Officer</a>
+        <a href="https://voice.ataraxydigital.com" target="_blank" rel="noopener">Voice AI Infrastructure</a>
+        <a href="https://portcoai.ataraxydigital.com" target="_blank" rel="noopener">AI for PE / VC Portfolios</a>
+        <a href="https://sprint.ataraxydigital.com/">AI Sprint</a>
+        <a href="https://qa.ataraxydigital.com/">Call QA</a>
+        <a href="https://revenue.ataraxydigital.com/">Revenue Engine</a>
+        <a href="https://vision.ataraxydigital.com/">Sports Vision</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="https://meet.ataraxydigital.com" target="_blank" rel="noopener">Book a call</a>
+        <a href="mailto:hello@ataraxydigital.com">hello@ataraxydigital.com</a>
+        <a href="https://www.linkedin.com/company/ataraxy-digital" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="tel:+59892657657">+598 92 657 657</a>
+        <address>Antonio Machado 7836<br>Barra de Carrasco, Canelones, Uruguay</address>
+      </div>
+    </div>
+    <div class="axyp-strip">
+      <div class="axyp-group">
+        <h4 class="axyp-label">Technology partners</h4>
+        <div class="axyp-logos">
+          <span class="axyp-brand" aria-label="Anthropic">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+            <span>Anthropic</span>
+          </span>
+          <span class="axyp-brand" aria-label="OpenAI">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+            <span>OpenAI</span>
+          </span>
+        </div>
+      </div>
+      <a class="axyp-group axyp-owner" href="https://whitepearltech.com/" target="_blank" rel="noopener">
+        <img class="axyp-owner-logo" src="/white-pearl-technology-group.png" alt="White Pearl Technology Group AB" width="227" height="72" loading="lazy">
+        <span class="axyp-owner-msg">ataraxy is co-owned by White Pearl Technology Group AB</span>
+      </a>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span class="yr">2026</span> ataraxy SAS</span>
+      <span>ataraxydigital.com</span>
+      <div class="lang-foot" role="group" aria-label="Language">
+        <a href="/" hreflang="en" data-lang="en" class="active">English</a>
+        <a href="/es/" hreflang="es" data-lang="es">Español</a>
+        <a href="/pt/" hreflang="pt-BR" data-lang="pt">Português</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll(".yr").forEach(e=>e.textContent=new Date().getFullYear());
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}})},{threshold:0.12});document.querySelectorAll(".reveal").forEach(el=>io.observe(el));</script>
+
+<script>(function(){var a=document.querySelectorAll(".lang-foot a");for(var i=0;i<a.length;i++){a[i].addEventListener("click",function(){var d=location.hostname.indexOf("ataraxydigital.com")>=0?";domain=.ataraxydigital.com":"";document.cookie="lang="+this.getAttribute("data-lang")+";path=/;max-age=31536000;samesite=lax"+d;});}})();</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body></html>

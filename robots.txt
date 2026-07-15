@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vision.ataraxydigital.com/sitemap.xml
