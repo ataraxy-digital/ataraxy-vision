@@ -311,6 +311,12 @@ footer{border-top:1px solid var(--line);padding:64px 0 44px;background:var(--bg-
 <link rel="alternate" hreflang="es" href="https://vision.ataraxydigital.com/es/">
 <link rel="alternate" hreflang="pt-BR" href="https://vision.ataraxydigital.com/pt/">
 <link rel="alternate" hreflang="x-default" href="https://vision.ataraxydigital.com/">
+<style>
+/* neural hero background (shared suite element, same as ataraxy-home) */
+.hero{position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:1}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.5;pointer-events:none;-webkit-mask-image:radial-gradient(135% 110% at 72% 42%,#000 42%,transparent 100%);mask-image:radial-gradient(135% 110% at 72% 42%,#000 42%,transparent 100%)}
+</style>
 </head>
 <body>
 <div class="atmo"></div>
@@ -352,6 +358,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 44px;background:var(--bg-
 
   <!-- HERO -->
   <section class="hero">
+    <canvas class="hero-bg" id="hero-bg" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="eyebrow reveal-load d1"><span>Sports Vision &middot; visión por computadora para el juego</span></div>
       <h1 class="reveal-load d2">IA que mira el partido y canta cada <span class="acc">tiro</span>.</h1>
@@ -643,4 +650,20 @@ const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.tar
 
 <script>(function(){var a=document.querySelectorAll(".lang-foot a");for(var i=0;i<a.length;i++){a[i].addEventListener("click",function(){var d=location.hostname.indexOf("ataraxydigital.com")>=0?";domain=.ataraxydigital.com":"";document.cookie="lang="+this.getAttribute("data-lang")+";path=/;max-age=31536000;samesite=lax"+d;});}})();</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script>
+/* hero background: organic neural net, variation H (synaptic web, straight edges + firing) */
+(function(){var c=document.getElementById('hero-bg');if(!c)return;if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var x=c.getContext('2d'),d,nodes=[],pulses=[],W=function(){return c.width},H=function(){return c.height};
+function fit(){var r=c.getBoundingClientRect();d=Math.min(window.devicePixelRatio||1,2);c.width=Math.max(1,r.width*d);c.height=Math.max(1,r.height*d);}
+function seed(){nodes=[];var N=Math.round(W()*H()/30000)+16;for(var i=0;i<N;i++)nodes.push({x:Math.random()*W(),y:Math.random()*H(),vx:(Math.random()-.5)*.2*d,vy:(Math.random()-.5)*.2*d});}
+fit();seed();
+function frame(){x.clearRect(0,0,W(),H());var R=168*d,i,j,edges=[];
+ for(i=0;i<nodes.length;i++){var p=nodes[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W())p.vx*=-1;if(p.y<0||p.y>H())p.vy*=-1;}
+ for(i=0;i<nodes.length;i++)for(j=i+1;j<nodes.length;j++){var a=nodes[i],b=nodes[j],dist=Math.hypot(a.x-b.x,a.y-b.y);if(dist<R){var o=(1-dist/R)*.5;x.strokeStyle='rgba(33,124,255,'+o+')';x.lineWidth=d;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();edges.push([a,b]);}}
+ if(edges.length&&Math.random()<.05){var e=edges[(Math.random()*edges.length)|0];pulses.push({a:e[0],b:e[1],t:0});}
+ for(var k=pulses.length-1;k>=0;k--){var pu=pulses[k];pu.t+=.04;if(pu.t>=1){pulses.splice(k,1);continue;}var qx=pu.a.x+(pu.b.x-pu.a.x)*pu.t,qy=pu.a.y+(pu.b.y-pu.a.y)*pu.t;x.fillStyle='rgba(150,238,255,'+(1-pu.t)+')';x.shadowColor='rgba(98,221,243,1)';x.shadowBlur=9*d;x.beginPath();x.arc(qx,qy,2.1*d,0,7);x.fill();x.shadowBlur=0;}
+ x.shadowColor='rgba(98,221,243,.5)';x.shadowBlur=4*d;for(i=0;i<nodes.length;i++){x.fillStyle='rgba(98,221,243,.85)';x.beginPath();x.arc(nodes[i].x,nodes[i].y,1.6*d,0,7);x.fill();}x.shadowBlur=0;
+ requestAnimationFrame(frame);}
+frame();addEventListener('resize',function(){fit();seed();});})();
+</script>
 </body></html>
