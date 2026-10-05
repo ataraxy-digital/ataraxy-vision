@@ -16,6 +16,7 @@ const SPANISH = new Set([
   'ES','MX','AR','CO','PE','VE','CL','EC','GT','CU','BO','DO','HN','PY','SV','NI','CR','PA','UY','PR','GQ',
 ]);
 const PORTUGUESE = new Set(['BR','PT','AO','MZ','CV','GW','ST','TL']);
+const BOT_RE = /bot|spider|crawl|slurp|bingpreview|facebookexternalhit|meta-external|cohere-ai|whatsapp|telegram|pinterest|embedly|quora link preview|vkshare|ia_archiver|skypeuripreview|chrome-lighthouse|google-inspectiontool|headlesschrome/i;
 
 export const config = {
   matcher: ['/((?!_next/|.*\\.[a-zA-Z0-9]+$).*)'],
@@ -32,6 +33,9 @@ export default function middleware(request: Request) {
 
   // already in a localized subtree → leave alone
   if (/^\/(es|pt)(\/|$)/.test(path)) return next();
+
+  // Search and AI crawlers must receive the requested canonical URL.
+  if (BOT_RE.test(request.headers.get('user-agent') || '')) return next();
 
   // explicit user choice from the language toggle wins over geolocation
   const chosen = cookieLang(request);

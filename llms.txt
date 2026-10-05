@@ -1,0 +1,21 @@
+# Ataraxy Sports Vision
+
+> Ataraxy is an applied AI agency based in Montevideo, Uruguay, serving LATAM and the US. Sports Vision is computer vision for live or recorded sports video, built on client infrastructure and owned by the client.
+
+## Service
+
+- [Sports Vision](https://vision.ataraxydigital.com/): Computer vision for live or recorded sports video, built on client infrastructure and owned by the client.
+- [How it works](https://vision.ataraxydigital.com/#how): The delivery process and operating model.
+- [Scope and ownership](https://vision.ataraxydigital.com/#own): What the client receives and how the engagement works.
+
+## Related Ataraxy services
+
+- [Ataraxy](https://www.ataraxydigital.com/): Agency overview, implementation cases, and contact.
+- [AI Sprint](https://sprint.ataraxydigital.com/): Related applied AI service.
+
+## Languages and contact
+
+- [English](https://vision.ataraxydigital.com/): Sports Vision service page in English.
+- [Español](https://vision.ataraxydigital.com/es/): Sports Vision service page in Español.
+- [Português](https://vision.ataraxydigital.com/pt/): Sports Vision service page in Português.
+- [Book a call](https://meet.ataraxydigital.com/): Discuss a project with Ataraxy.
